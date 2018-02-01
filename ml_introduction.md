@@ -136,9 +136,22 @@ fig.savefig('display2.png')
 What we use for creating a linear regression is the numpy function ``polyfit``, to get our values for m and b (remember maths in 5th grade :-)
 -> y = mx + b
 In the second to last line we plot exactly these values in green, resulting in this graph:
-
+![Image 2](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display2.png)
+Based on the linear regression, we can now estimate the price for a house with a landsize of 355.6m^2^. Just add the following line at the bottom of your script to get the exact result:
 ```python
-
+y = m*355.6 + b
+print(y)
 ```
+The result output for y, the price, is ``1034505.28788``, meaning that, based on our simple ML function, the price for a house with a landsize of 355.6m^2^ should be just above $1 million. Pretty cool, right? This was simple, let's start adding a little bit of ML-extra with ``sklearn`` to the mix. What we will do now is essentially the same thing as above, except that we will use a more adaptable and powerful function. So instead of the excerpt above, we will insert following lines of code - and I will explain after:
+```python
+X = X.values.reshape(-1, 1)
 
+model = LinearRegression()
+model.fit(X, y)
 
+X_new = [[355.6]]
+print(model.predict(X_new))
+```
+The first line of code is needed only, because we are only considering a single predictor, the landsize. Usually with sklearn you make predictions based on multiple inputs like also the number of rooms, bathrooms and area code. For now, we will stay with only the landsize.
+Next we declare or model, meaning the type of regression to use, in our case (as we did above) a linear regression. This then get's fitted with our two data lists, X and y. All this basically does is generating a linear regression based on X and y, same as we did above - manually.
+Second to last, we have to create a list with the value, in our case the landsize, we want to predict the price to. For every value in ``X_new`` we have to create another list inside the outer list (see next example).
