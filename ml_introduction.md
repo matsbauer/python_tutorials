@@ -121,7 +121,7 @@ ax.scatter(X, y)
 fig.savefig('graph.png')
 ```
 The result of this plotting is this scatter of data.
-![Image of Graph](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display1.png)
+![Image of Graph](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/display1.png)
 What we see from this graph is, that there are lots of houses in the range from very little to $2 million dollars in the range of 150 to 1000m^2^ landsize. What we need to understand now is, how this graph shows sums up as a regression. In our case: linear regression. To do that, we need to add a second graph to our plot. Our main block of code from above will increase to looking like this:
 ```python
 fig, ax = plt.subplots(1, 1)
@@ -137,7 +137,7 @@ fig.savefig('display2.png')
 What we use for creating a linear regression is the numpy function ``polyfit``, to get our values for m and b (remember maths in 5th grade :-)
 -> y = mx + b
 In the second to last line we plot exactly these values in green, resulting in this graph:
-![Image 2](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display2.png)
+![Image 2](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/display2.png)
 Based on the linear regression, we can now estimate the price for a house with a landsize of 355.6m^2^. Just add the following line at the bottom of your script to get the exact result:
 ```python
 y = m*355.6 + b
