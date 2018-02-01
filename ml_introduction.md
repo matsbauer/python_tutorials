@@ -168,6 +168,35 @@ This generates a multivalue-input and -output function, predicting housing price
 [ 1034505.28787783  1155213.33627154  1301184.16680796]
 ```
 
-### Multiple predictors
+## Multiple predictors
 
 In the next step in creating our first ML application, we want to increase the input predictors from only landsize to landsize, number of rooms and bathrooms. This will increase our prediction accuracy simply based on the principle of "more input, better output".
+
+We start with introducing a new regression scheme, the DecisionTreeRegressor. This is a function in sklearn that enables you to use multiple input predictors to predict the outcome. The inputs now are landsize, number of rooms and number of bathrooms, and we are still predicting the price.
+
+#### Practical example
+I am currently looking at buying a house and want a landsize of 355m^2^. I have $750,000 and want to know whether I can buy a house with three rooms or only two rooms, with one bathroom. Let's first look at the new script we use for the DecisionTreeRegressor:
+
+```python
+from sklearn.tree import DecisionTreeRegressor
+import pandas as pd
+
+df = pd.read_csv("melb_data.csv")
+df = df.fillna(df.mean())
+
+predictors = ["Landsize", "Rooms", "Bathroom"]
+X = df[predictors]
+y = df.Price
+
+model = DecisionTreeRegressor()
+model.fit(X, y)
+
+X_new = [[355, 2, 1],[355, 3, 1]]
+print(model.predict(X_new))
+```
+Explanation here...
+
+Now to the results:
+```python
+[ 745000.  756000.]
+```
