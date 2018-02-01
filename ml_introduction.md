@@ -116,9 +116,9 @@ y = df.Price        #and y as the price
 fig, ax = plt.subplots(1, 1)
 ax.set_title('House Pricing vs. Landsize')
 ax.scatter(X, y)
-fig.savefig('display.png')
-
+fig.savefig('graph.png')
 ```
+![Image of Graph](https://github.com/matsbauer/python_tutorials/blob/master/display.png)
 
 ```python
 import matlibplot
