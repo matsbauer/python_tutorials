@@ -3,7 +3,7 @@ by Mats Bauer
 
 Machine Learning is an exciting area of programming. Basically ML describes the ability for computers to understand data and generate output for unknown content, based on the data. The best known ML algorithm is probably the spam filter. What it does is learns what spam looks like, based on people marking e-mails as spam, and filtering incoming e-mails based on the learned data.
 
-### Sklearn - learning by doing.
+## Sklearn - learning by doing.
 
   Let's start with a little project. First you need all the right plugins. I myself am working with Cloud9, but you can also work with a local Python application like Spyder or even Terminal. For this example you will need to install:
   - matlibplot
