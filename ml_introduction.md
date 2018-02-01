@@ -61,7 +61,7 @@ Propertycount    18395 non-null float64
 dtypes: float64(12), int64(2), object(8)
 memory usage: 3.1+ MB
 ```
-We see now, that we have a file with 18396 entries and 22 columns, with all the names. Second thing we see is that for 18396 houses, only for 7762 houses the BuildingArea is known and only for 8958 houses the YearBuilt. This can mean, that these rows of data can be hard to use in full context. In this introduction we want to estimate the house price based on size. As the BuildingArea is only available for half the houses and the Landsize for 90%, when it comes to learning from data, we will later use Landsize to predict House Prices. Next up, we want to find some basic mathematical values for the data set. This is done using the describe() function.
+We see now, that we have a file with 18396 entries and 22 columns, with all the names and data types. Second thing we see is that for 18396 houses, only for 7762 houses the BuildingArea is known and only for 8958 houses the YearBuilt. This can mean, that these rows of data can be hard to use in full context. In this introduction we want to estimate the house price based on size. As the BuildingArea is only available for half the houses and the Landsize for 90%, when it comes to learning from data, we will later use Landsize to predict House Prices. Next up, we want to find some basic mathematical values for the data set. This is done using the describe() function.
 
 ```python
 >>> df.describe().round()
@@ -175,7 +175,7 @@ In the next step in creating our first ML application, we want to increase the i
 We start with introducing a new regression scheme, the DecisionTreeRegressor. This is a function in sklearn that enables you to use multiple input predictors to predict the outcome. The inputs now are landsize, number of rooms and number of bathrooms, and we are still predicting the price.
 
 #### Practical example
-I am currently looking at buying a house and want a landsize of 355m^2^. I have $750,000 and want to know whether I can buy a house with three rooms or only two rooms, with one bathroom. Let's first look at the new script we use for the DecisionTreeRegressor:
+I am currently looking at buying a house and want a landsize of 355m^2^. I have $750,000 and want to know whether I can buy a house with three rooms or only two rooms, with one bathroom. Let's first look at the new script we use for the DecisionTreeRegressor (DTR):
 
 ```python
 from sklearn.tree import DecisionTreeRegressor
@@ -194,7 +194,8 @@ model.fit(X, y)
 X_new = [[355, 2, 1],[355, 3, 1]]
 print(model.predict(X_new))
 ```
-Explanation here...
+The script starts by importing both pandas and sklearn. For sklearn we will now use the DTR, meaning that it uses a flexible regression algorithm to predict the pricing. In the second passage we do the same as above, reading the CSV file and saving its values and filling the empty fields with mean values. The third block defines the three predictors and saves the data for these to X and the price to Y.
+Next
 
 Now to the results:
 ```python
