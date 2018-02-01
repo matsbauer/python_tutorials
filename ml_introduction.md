@@ -115,13 +115,29 @@ y = df.Price        #and y as the price
 
 fig, ax = plt.subplots(1, 1)
 ax.set_title('House Pricing vs. Landsize')
+ax.ticklabel_format(style = 'plain') #basic formatting, to make it look good
 ax.scatter(X, y)
 fig.savefig('graph.png')
 ```
-![Image of Graph](https://github.com/matsbauer/python_tutorials/blob/master/display.png)
+The result of this plotting is this scatter of data.
+![Image of Graph](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display1.png)
+What we see from this graph is, that there are lots of houses in the range from very little to $2 million dollars in the range of 150 to 1000m^2^ landsize. What we need to understand now is, how this graph shows sums up as a regression. In our case: linear regression. To do that, we need to add a second graph to our plot. Our main block of code from above will increase to looking like this:
+```python
+fig, ax = plt.subplots(1, 1)
+ax.set_title('House Pricing vs. Landsize')
+ax.ticklabel_format(style = 'plain')
+ax.set_xlim(-20, 1500) #remove the white area with negative landsize
+ax.set_ylim(-20, 7000000) #remove negative house prices
+ax.scatter(X, y)
+m,b = np.polyfit(X, y, 1)
+ax.plot(X, m*X + b, '-', color="green")
+fig.savefig('display2.png')
+```
+What we use for creating a linear regression is the numpy function ``polyfit``, to get our values for m and b (remember maths in 5th grade :-)
+-> y = mx + b
+In the second to last line we plot exactly these values in green, resulting in this graph:
 
 ```python
-import matlibplot
 
 ```
 
