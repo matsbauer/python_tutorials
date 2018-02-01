@@ -97,7 +97,8 @@ max          21650.0
 ```
 This function gives us a beautiful overview of values like mean, std, min, max and quantiles. We can see that house prices start at $85,000 and end with $9 million. The smallest houses have 1 room, the largest 12, on average houses in this data table have 3 rooms and a landsize of 558m^2^. 
 
-Let's get started with our prediction. For a start, we will use a simple linear regression to predict house prices. To visualize this we will use matlibplot and a scatter plot. This following is now inserted into the predict.py file and executing.
+Let's get started with our prediction. For a start, we will use a simple linear regression to predict house prices based on the landsize. We call values to predict based on learning data labels, and the values we base our predictions on predictors. This means that our label is the house price and predictor the landsize.
+To visualize this we will use matlibplot and a scatter plot. This following is now inserted into the predict.py file and executing.
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -152,6 +153,21 @@ model.fit(X, y)
 X_new = [[355.6]]
 print(model.predict(X_new))
 ```
-The first line of code is needed only, because we are only considering a single predictor, the landsize. Usually with sklearn you make predictions based on multiple inputs like also the number of rooms, bathrooms and area code. For now, we will stay with only the landsize.
+The first line of code is needed only, because we are considering only a single predictor, the landsize, you don't need to worry about that for now. Usually with sklearn you make predictions based on multiple inputs like also the number of rooms, bathrooms and area code. For now, we will stay with only the landsize.
 Next we declare or model, meaning the type of regression to use, in our case (as we did above) a linear regression. This then get's fitted with our two data lists, X and y. All this basically does is generating a linear regression based on X and y, same as we did above - manually.
-Second to last, we have to create a list with the value, in our case the landsize, we want to predict the price to. For every value in ``X_new`` we have to create another list inside the outer list (see next example).
+Second to last, we have to create a list with the value, in our case the landsize, we want to predict the price to. For every value in ``X_new`` we have to create another list inside the outer list (see further example). Printing the result of the predict function gives us basically the values y from above:
+```python
+[ 1034505.28787783]
+```
+This result matches our result for y with the manual linear regression. Advantage, we can automate and expand this very easily. Let's replace the ``X_new`` with following:
+```python
+X_new = [[355.6],[521.4],[721.9]]
+```
+This generates a multivalue-input and -output function, predicting housing prices for all three input landsizes:
+```python
+[ 1034505.28787783  1155213.33627154  1301184.16680796]
+```
+
+### Multiple predictors
+
+In the next step in creating our first ML application, we want to increase the input predictors from only landsize to landsize, number of rooms and bathrooms. This will increase our prediction accuracy simply based on the principle of "more input, better output".
