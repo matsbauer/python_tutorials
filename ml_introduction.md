@@ -210,3 +210,35 @@ Pressing execute generates the prediction outcome:
 [ 745000.  756000.]
 ```
 It seems like we won't be able to buy that house with 3 rooms, as a second room is predicted to cost $11,000 more than the same house with 2 rooms.
+
+#### Neighbor Classification
+
+Let's look at one more classification method, the KNeighborsRegressor. Below we have 5 object with different forms and colors. On the bottom right we have a object that we want to predict on basis of the others. What we see immediately is, that the form matches with number 3, so we can categorize the two forms as neighbors. Looking at the color we see a light green, that can be neighbored with number 2 and number 3. I hope you understand the principle of neighboring - we are finding the closest match to the input value in our existing data and grouping these. In the given example, we would group the input form with its neighbors 2 and 3, but find a better match with number 3 due to the match of form.
+![Neighbor](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/neighbor.png)
+
+Let's apply this new regression method to our example of calculating housing costs for our 355m^2^ house with two or three rooms.
+The adaption is very straight forward and I will only give you the final script. The only change is the model and import for sklearn.
+```python
+from sklearn.neighbors import KNeighborsRegressor
+import pandas as pd
+
+df = pd.read_csv("melb_data.csv")
+df = df.fillna(df.mean())
+
+predictors = ["Landsize", "Rooms", "Bathroom"]
+X = df[predictors]
+y = df.Price
+
+model = KNeighborsRegressor(n_neighbors=2)
+model.fit(X, y)
+
+X_new = [[355, 2, 1],[355, 3, 1]]
+print(model.predict(X_new))
+```
+In the model declaration we call the function ``KNeighborsRegressor``, in which we pass the number of neighbors we want to consider. This is the clustering factor - in englisch: how many items are allowed in a group / cluster. If we have 4 similar green objects and set ``n_neighbors`` to 2, the algorithm will generate two clusters of 2 green objects, instead of one larger cluster with all 4 objects. This value should be chosen upon the amount of similar value available. This can be judged based on the standard deviation (std) given when running ``df.describe()``. The larger the std, the smaller the clustering should be, to avoid over clustering. Example, we count apples that people have at home. If the most apples we found are 129 and the second largest is 12, we don't want to force these two completely different values to cluster.
+
+Let's look at the results of this method:
+```python
+[ 667500.  756000.]
+```
+Again, it looks like we can't afford the house with three rooms, as we get the same result of $756,000. In this prediction, the result for our two room house has dropped by over 10% to $667,500. This is where experience and good understanding is needed by the data engineer. 
