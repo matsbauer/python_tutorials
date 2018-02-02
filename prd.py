@@ -1,4 +1,6 @@
-from sklearn.neighbors import KNeighborsRegressor
+#from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import Perceptron
+from sklearn.preprocessing import PolynomialFeatures
 import pandas as pd
 import numpy as np
 import matplotlib
@@ -12,8 +14,8 @@ predictors = ["Landsize", "Rooms", "Bathroom"]
 X = df[predictors]
 y = df.Price
 
-model = KNeighborsRegressor(n_neighbors=2)
+model = Perceptron(max_iter=5, tol=None)
 model.fit(X, y)
 
-X_new = [[355, 2, 1],[355, 3, 1]]
+X_new = [[355, 2, 1]]
 print(model.predict(X_new))
