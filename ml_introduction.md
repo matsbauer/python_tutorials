@@ -242,3 +242,9 @@ Let's look at the results of this method:
 [ 667500.  756000.]
 ```
 Again, it looks like we can't afford the house with three rooms, as we get the same result of $756,000. In this prediction, the result for our two room house has dropped by over 10% to $667,500. This is where experience and good understanding is needed by the data engineer. 
+
+#### Optimization
+
+In order of increasing the prediction quality, optimization can be done by increasing the number of attributes / predictors or improving the input data. Understanding your data and functions is crucial in creating accurate predictions. We can see that there is some deviance between the different methods, but researchers found, that the deviance between the methods decreases, the more data you use. Basically, if you insert 2,000,000,000,000 data points into a system, the difference between the regression methods goes against 0.
+
+ I hope you got a good first taste of what you can do with ML. If you want to continue and have a look at the available regression methods, have a look at this -> [sklearn-models](http://scikit-learn.org/stable/modules/linear_model.html). See you next time!
