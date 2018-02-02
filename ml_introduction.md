@@ -3,7 +3,7 @@ by Mats Bauer
 
 Machine Learning is an exciting area of programming. Basically ML describes the ability for computers to understand data and generate output for unknown content, based on the data. The best known ML algorithm is probably the spam filter. What it does is learns what spam looks like, based on people marking e-mails as spam, and filtering incoming e-mails based on the learned data.
 
-### Sklearn - learning by doing.
+## Sklearn - learning by doing.
 
   Let's start with a little project. First you need all the right plugins. I myself am working with Cloud9, but you can also work with a local Python application like Spyder or even Terminal. For this example you will need to install:
   - matlibplot
@@ -61,7 +61,7 @@ Propertycount    18395 non-null float64
 dtypes: float64(12), int64(2), object(8)
 memory usage: 3.1+ MB
 ```
-We see now, that we have a file with 18396 entries and 22 columns, with all the names. Second thing we see is that for 18396 houses, only for 7762 houses the BuildingArea is known and only for 8958 houses the YearBuilt. This can mean, that these rows of data can be hard to use in full context. In this introduction we want to estimate the house price based on size. As the BuildingArea is only available for half the houses and the Landsize for 90%, when it comes to learning from data, we will later use Landsize to predict House Prices. Next up, we want to find some basic mathematical values for the data set. This is done using the describe() function.
+We see now, that we have a file with 18396 entries and 22 columns, with all the names and data types. Second thing we see is that for 18396 houses, only for 7762 houses the BuildingArea is known and only for 8958 houses the YearBuilt. This can mean, that these rows of data can be hard to use in full context. In this introduction we want to estimate the house price based on size. As the BuildingArea is only available for half the houses and the Landsize for 90%, when it comes to learning from data, we will later use Landsize to predict House Prices. Next up, we want to find some basic mathematical values for the data set. This is done using the describe() function.
 
 ```python
 >>> df.describe().round()
@@ -121,7 +121,7 @@ ax.scatter(X, y)
 fig.savefig('graph.png')
 ```
 The result of this plotting is this scatter of data.
-![Image of Graph](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display1.png)
+![Image of Graph](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/display1.png)
 What we see from this graph is, that there are lots of houses in the range from very little to $2 million dollars in the range of 150 to 1000m^2^ landsize. What we need to understand now is, how this graph shows sums up as a regression. In our case: linear regression. To do that, we need to add a second graph to our plot. Our main block of code from above will increase to looking like this:
 ```python
 fig, ax = plt.subplots(1, 1)
@@ -137,7 +137,7 @@ fig.savefig('display2.png')
 What we use for creating a linear regression is the numpy function ``polyfit``, to get our values for m and b (remember maths in 5th grade :-)
 -> y = mx + b
 In the second to last line we plot exactly these values in green, resulting in this graph:
-![Image 2](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/display2.png)
+![Image 2](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/display2.png)
 Based on the linear regression, we can now estimate the price for a house with a landsize of 355.6m^2^. Just add the following line at the bottom of your script to get the exact result:
 ```python
 y = m*355.6 + b
@@ -168,6 +168,36 @@ This generates a multivalue-input and -output function, predicting housing price
 [ 1034505.28787783  1155213.33627154  1301184.16680796]
 ```
 
-### Multiple predictors
+## Multiple predictors
 
 In the next step in creating our first ML application, we want to increase the input predictors from only landsize to landsize, number of rooms and bathrooms. This will increase our prediction accuracy simply based on the principle of "more input, better output".
+
+We start with introducing a new regression scheme, the DecisionTreeRegressor. This is a function in sklearn that enables you to use multiple input predictors to predict the outcome. The inputs now are landsize, number of rooms and number of bathrooms, and we are still predicting the price.
+
+#### Practical example
+I am currently looking at buying a house and want a landsize of 355m^2^. I have $750,000 and want to know whether I can buy a house with three rooms or only two rooms, with one bathroom. Let's first look at the new script we use for the DecisionTreeRegressor (DTR):
+
+```python
+from sklearn.tree import DecisionTreeRegressor
+import pandas as pd
+
+df = pd.read_csv("melb_data.csv")
+df = df.fillna(df.mean())
+
+predictors = ["Landsize", "Rooms", "Bathroom"]
+X = df[predictors]
+y = df.Price
+
+model = DecisionTreeRegressor()
+model.fit(X, y)
+
+X_new = [[355, 2, 1],[355, 3, 1]]
+print(model.predict(X_new))
+```
+The script starts by importing both pandas and sklearn. For sklearn we will now use the DTR, meaning that it uses a flexible regression algorithm to predict the pricing. In the second passage we do the same as above, reading the CSV file and saving its values and filling the empty fields with mean values. The third block defines the three predictors and saves the data for these to X and the price to Y.
+Next
+
+Now to the results:
+```python
+[ 745000.  756000.]
+```
