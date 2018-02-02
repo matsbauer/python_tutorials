@@ -196,6 +196,7 @@ print(model.predict(X_new))
 ```
 The script starts by importing both packages pandas and sklearn. For sklearn we will now use the DTR, meaning that it uses a flexible regression algorithm to predict the pricing. This Decission or Classification Tree can be understood as a successive process, in which all predictors are asked one after the other. Following the tree from top to bottom results in the output.
 ![Tree](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/Example-Decision-Tree.png)
+
 As seen in this example, there is offcourse room for error for women that are over 180cm, even though they weigh less than 80kg, because the DTR generates the output early.
 
 In the second passage of the script we do the same as in the example above, reading the CSV file and saving its values to the variable df. With the function fillna, we are filling the empty fields with mean values. The third block defines the three predictors and saves the data for these to X and the price to Y.
