@@ -194,10 +194,18 @@ model.fit(X, y)
 X_new = [[355, 2, 1],[355, 3, 1]]
 print(model.predict(X_new))
 ```
-The script starts by importing both pandas and sklearn. For sklearn we will now use the DTR, meaning that it uses a flexible regression algorithm to predict the pricing. In the second passage we do the same as above, reading the CSV file and saving its values and filling the empty fields with mean values. The third block defines the three predictors and saves the data for these to X and the price to Y.
-Next
+The script starts by importing both packages pandas and sklearn. For sklearn we will now use the DTR, meaning that it uses a flexible regression algorithm to predict the pricing. This Decission or Classification Tree can be understood as a successive process, in which all predictors are asked one after the other. Following the tree from top to bottom results in the output.
+![Tree](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/Example-Decision-Tree.png)
+As seen in this example, there is offcourse room for error for women that are over 180cm, even though they weigh less than 80kg, because the DTR generates the output early.
 
-Now to the results:
+In the second passage of the script we do the same as in the example above, reading the CSV file and saving its values to the variable df. With the function fillna, we are filling the empty fields with mean values. The third block defines the three predictors and saves the data for these to X and the price to Y.
+
+Now we come to the bit that's changed, the definition of the regression. If you look back at the last example, we used ``LinearRegression()`` as our regression model, now we change this to the ``DecisionTreeRegressor``. This changes the prediction algorithm to the tree structure above. Next we fit the model with out data, as before.
+
+To generate our prediction we create the variable ``X_new`` and fill it with two datasets. Before each set included one value, the landsize, now we need to add three predictors, the landsize, number of rooms and number of bathrooms, to predict the house price. As planned, we want to find out if we can afford a house with 355m^2^ and 3 rooms or only 2 rooms with our $750,000. 
+
+Pressing execute generates the prediction outcome:
 ```python
 [ 745000.  756000.]
 ```
+It seems like we won't be able to buy that house with 3 rooms, as a second room is predicted to cost $11,000 more than the same house with 2 rooms.
