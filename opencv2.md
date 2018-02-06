@@ -16,4 +16,14 @@ Now we start our python live editor in terminal by typing ```python3``` and impo
 ```python
 >>> import cv2
 ```
-Next we start by telling our application where to find our image and whether we want to import it in color(1), grayscale(0) or unchanged(-1). 
+Next we start by telling our application where to find our image and whether we want to import it in color(1), grayscale(0) or unchanged(-1). We want to start by loading the image in grayscale, so we take the function below with the attribute 0. To have a look at the image, we need to use the cv2 function ```imwrite()``` to save a copy of our local instance ```img```.
+```python
+>>> img = cv2.imread('car.jpg',0)
+>>> cv2.imwrite('grayscale.jpg', img)
+True
+```
+![image converted to graysacle](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/grayscale.jpg)
+That's looking good already. For my example, I want to create a highlighting mask, to seperate the surroundings from the car and the road. We will do this, using a color filter - thus we will need the image in full color (attribute = 1), instead of in a grayscale (0).
+```python
+>>> img = cv2.imread('car.jpg', 1)
+```
