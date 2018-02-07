@@ -27,3 +27,5 @@ That's looking good already. For my example, I want to create a highlighting mas
 ```python
 >>> img = cv2.imread('car.jpg', 1)
 ```
+Now we have loaded the original image. For the next step, we need to find out, what color the road has. There is a simple and a more complicated (OpenCV2) way of doing it, let's start by going simple. A simple online tool for getting color codes from an image: [ColorCode Picker]("https://html-color-codes.info/colors-from-image/"). 
+![Screenshot Color Picker](https://raw.githubusercontent.com/matsbauer/python_tutorials/master/data/2018-02-06_10h23_12.png)
